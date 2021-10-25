@@ -1,21 +1,13 @@
-pipeline {
-    environment {
-        registry = “bkshashi9/webapp”
-        registryCredential = ‘dockerhub’
-        dockerImage = ‘’
-    }
+pipeline{
     agent any
     stages {
-        stage(‘Cloning Git’) {
-            steps {
-                git ‘ssh://git@18.139.110.189:2222/git-server/repos/webapp.git’
-            }
-        }
-        stage(‘Building Docker Image’) {
+        stage("git"){
             steps{
-                script {
-                    dockerImage = docker.build registry + “:$BUILD_NUMBER”
-                }
+                cleanWs()
+                sh '''
+                    git clone https://github.com/spring-projects/spring-petclinic.git
+                    docker build -t my-petia-project .
+                '''
             }
         }
     }
