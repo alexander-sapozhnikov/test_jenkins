@@ -7,8 +7,6 @@ pipeline{
         stage("clone repo"){
             steps{
                 cleanWs()
-                git 'https://github.com/alexander-sapozhnikov/test_jenkins.git'
-           
                 sh '''
                     git clone https://github.com/spring-projects/spring-petclinic.git
                 '''
