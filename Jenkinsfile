@@ -1,15 +1,39 @@
 pipeline{
     agent any
+    environment {
+		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+	}
     stages {
-        stage("git"){
+        stage("clone repo"){
             steps{
                 cleanWs()
                 git 'https://github.com/alexander-sapozhnikov/test_jenkins.git'
+           
                 sh '''
                     git clone https://github.com/spring-projects/spring-petclinic.git
-                    docker build -t my-petia-project .
                 '''
             }
         }
+        stage("build"){
+            steps {
+                sh '''
+                    docker build -t my-petia-project-ready -f Dockerfile .
+                '''
+            }
+        }
+        stage('Login') {
+
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}
+		}
+		
+		stage('Push') {
+
+			steps {
+				sh 'docker push alexandersapozhnikov/my-petia-project-ready'
+			}
+		}
+
     }
 }
