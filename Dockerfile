@@ -2,5 +2,5 @@
 
 FROM openjdk:8 
 WORKDIR /app/
-COPY --from=builder /app/ /app/
+COPY /spring-petclinic/target /app/
 CMD ["java", "-jar", "target/*.jar"]
