@@ -6,5 +6,5 @@ RUN mvn install
 
 FROM openjdk:8 
 WORKDIR /app/
-COPY --from=builder /app/ /app/
-CMD ["java", "-jar", "target/*.jar"] 
+COPY --from=builder /app/target /app/
+CMD ["java", "-jar", "*.jar"] 
