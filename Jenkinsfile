@@ -7,16 +7,12 @@ pipeline{
         stage("clone repo"){
             steps{
                 cleanWs()
-                sh '''
-                    git clone https://github.com/spring-projects/spring-petclinic.git
-                '''
+                sh 'git clone https://github.com/spring-projects/spring-petclinic.git'
             }
         }
         stage("build"){
             steps {
-                sh '''
-                    docker build -t my-petia-project-ready -f Dockerfile .
-                '''
+                sh 'docker build -t alexandersapozhnikov/my-petia-project-ready -f Dockerfile .'
             }
         }
         stage('Login') {
