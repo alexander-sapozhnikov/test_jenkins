@@ -7,4 +7,4 @@ RUN mvn install
 FROM openjdk:8 
 WORKDIR /app/
 COPY --from=builder /app/target/ /app/
-CMD ["java", "-jar", "*.jar"] 
+CMD ["java", "-jar", "spring-petclinic-2.5.0-SNAPSHOT.jar"] 
