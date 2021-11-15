@@ -6,7 +6,6 @@ pipeline{
     stages {
         stage("clone repo"){
             steps{
-                cleanWs()
                 sh 'git clone https://github.com/spring-projects/spring-petclinic.git'
             }
         }
@@ -22,12 +21,15 @@ pipeline{
 			}
 		}
 		
-		stage('Push') {
+	stage('Push') {
 
-			steps {
-				sh 'docker push alexandersapozhnikov/my-petia-project-ready'
-			}
+		steps {
+			sh 'docker push alexandersapozhnikov/my-petia-project-ready'
 		}
+	} 
+	stage("clean"){
+            cleanWs()
+        }
 
     }
 }
