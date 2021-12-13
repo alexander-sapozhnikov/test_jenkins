@@ -4,6 +4,11 @@ pipeline{
 		DOCKERHUB_CREDENTIALS=credentials('dockerhub')
 	}
     stages {
+	stage("clean"){
+		steps {
+			cleanWs()
+		}
+        }
         stage("clone repo"){
             steps{
                 sh 'git clone https://github.com/spring-projects/spring-petclinic.git'
