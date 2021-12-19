@@ -27,9 +27,14 @@ pipeline{
 			sh 'docker push alexandersapozhnikov/my-petia-project-ready'
 		}
 	} 
-	stage("clean2"){
+	stage("clean"){
 		steps {
 			cleanWs()
+		}
+        }
+	stage("clean image"){
+		steps {
+			sh 'docker rmi alexandersapozhnikov/my-petia-project-ready'
 		}
         }
 
